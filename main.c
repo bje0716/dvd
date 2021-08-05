@@ -6,11 +6,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 
 // 구조체 선언 부분
 struct Person {
 	char name[20]; // 이름
-	int tel; // 연락처
+	char tel[15]; // 연락처
+	int latePaymentCount; // 연체횟수
 };
 
 struct DvdInfo {
@@ -25,6 +27,11 @@ struct RentalInfo {
 	int rentalDate; // 대여날짜
 	int returnDate; // 반납날짜
 	bool isLatePayment; // 연체여부
+};
+
+struct BlackList {
+	char name[20]; // 이름
+	int latePaymentCount; // 연체횟수
 };
 
 enum {
