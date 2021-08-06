@@ -1,6 +1,13 @@
 // scanf 컴파일 에러 무시
 #define _CRT_SECURE_NO_WARNINGS
 
+// 매크로 상수 선언
+#define ARR_SIZE 100
+#define STR_LEN 20
+#define TEL_LEN 15
+#define ISBN_LEN 50
+#define DVD_NAME_LEN 100
+
 // 헤더 파일
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,27 +17,27 @@
 
 // 구조체 선언 부분
 struct Person {
-	char name[20]; // 이름
-	char tel[15]; // 연락처
+	char name[STR_LEN]; // 이름
+	char tel[TEL_LEN]; // 연락처
 	int latePaymentCount; // 연체횟수
 };
 
 struct DvdInfo {
-	char isbn[50]; // isbn
-	char genre[20]; // 장르
+	char isbn[ISBN_LEN]; // isbn
+	char genre[STR_LEN]; // 장르
 	int lanchYear; // 출시일
 };
 
 struct RentalInfo {
-	char dvdName[100]; // dvd 이름
-	char rentalName[20]; // 대여자
+	char dvdName[DVD_NAME_LEN]; // dvd 이름
+	char rentalName[STR_LEN]; // 대여자
 	int rentalDate; // 대여날짜
 	int returnDate; // 반납날짜
 	bool isLatePayment; // 연체여부
 };
 
 struct BlackList {
-	char name[20]; // 이름
+	char name[STR_LEN]; // 이름
 	int latePaymentCount; // 연체횟수
 };
 
@@ -58,7 +65,6 @@ enum {
 	DVD_QUIT = 5
 };
 
-const int arrSize = 100; // 배열 크기 지정
 const int mainMenuOut = 7;
 int selectedMenu = 0;
 
@@ -73,9 +79,9 @@ void main() {
 	struct RentalInfo* rentalArr;
 
 	// 포인터 구조체 동적배열 선언
-	pArr = (struct Person*)malloc(sizeof(struct Person) * arrSize);
-	dvdArr = (struct DvdInfo*)malloc(sizeof(struct DvdInfo) * arrSize);
-	rentalArr = (struct RentalInfo*)malloc(sizeof(struct RentalInfo) * arrSize);
+	pArr = (struct Person*)malloc(sizeof(struct Person) * ARR_SIZE);
+	dvdArr = (struct DvdInfo*)malloc(sizeof(struct DvdInfo) * ARR_SIZE);
+	rentalArr = (struct RentalInfo*)malloc(sizeof(struct RentalInfo) * ARR_SIZE);
 
 	// 메인메뉴 출력
 	while (1) {
@@ -144,4 +150,8 @@ void showPersonInfoMenu() {
 	printf(" 5. 종료 \n\n");
 
 	printf("선택 : ");
+}
+
+void personAddInfo() {
+
 }
