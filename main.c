@@ -74,7 +74,7 @@ RentalInfo rentalInfo;
 BlackList blackList;
 
 // 함수 선언 부분
-void showMenu();
+void showMainMenu();
 void showPersonInfoMenu();
 
 void main() {
@@ -85,7 +85,7 @@ void main() {
 
 	// 메인메뉴 출력
 	while (1) {
-		showMenu();
+		showMainMenu();
 
 		scanf("%d", &selectedMenu);
 		getchar();
@@ -119,7 +119,7 @@ void main() {
 	}
 }
 
-void showMenu() {
+void showMainMenu() {
 	printf("\n============================ \n");
 	printf("   DVD 대여 정보 프로그램 \n");
 	printf("============================ \n\n");
