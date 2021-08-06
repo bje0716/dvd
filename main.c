@@ -16,30 +16,30 @@
 #include <time.h>
 
 // 구조체 선언 부분
-struct Person {
+typedef struct {
 	char name[STR_LEN]; // 이름
 	char tel[TEL_LEN]; // 연락처
 	int latePaymentCount; // 연체횟수
-};
+} Person;
 
-struct DvdInfo {
+typedef struct {
 	char isbn[ISBN_LEN]; // isbn
 	char genre[STR_LEN]; // 장르
 	int lanchYear; // 출시일
-};
+} DvdInfo;
 
-struct RentalInfo {
+typedef struct {
 	char dvdName[DVD_NAME_LEN]; // dvd 이름
 	char rentalName[STR_LEN]; // 대여자
 	int rentalDate; // 대여날짜
 	int returnDate; // 반납날짜
 	bool isLatePayment; // 연체여부
-};
+} RentalInfo;
 
-struct BlackList {
+typedef struct {
 	char name[STR_LEN]; // 이름
 	int latePaymentCount; // 연체횟수
-};
+} BlackList;
 
 enum {
 	// 메인 메뉴
@@ -68,6 +68,11 @@ enum {
 const int mainMenuOut = 7;
 int selectedMenu = 0;
 
+Person person;
+DvdInfo dvdInfo;
+RentalInfo rentalInfo;
+BlackList blackList;
+
 // 함수 선언 부분
 void showMenu();
 void showPersonInfoMenu();
@@ -77,11 +82,6 @@ void main() {
 	struct Person* pArr;
 	struct DvdInfo* dvdArr;
 	struct RentalInfo* rentalArr;
-
-	// 포인터 구조체 동적배열 선언
-	pArr = (struct Person*)malloc(sizeof(struct Person) * ARR_SIZE);
-	dvdArr = (struct DvdInfo*)malloc(sizeof(struct DvdInfo) * ARR_SIZE);
-	rentalArr = (struct RentalInfo*)malloc(sizeof(struct RentalInfo) * ARR_SIZE);
 
 	// 메인메뉴 출력
 	while (1) {
