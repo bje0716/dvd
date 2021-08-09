@@ -99,6 +99,7 @@ enum {
 // 변수 선언 부분
 const int menuCntOut = 7;
 int selectedMenu = 0;
+int cnt = 0;
 
 // 구조체 포인터 배열 선언 부분
 Person* perPtr[ARR_SIZE];
@@ -236,14 +237,13 @@ void personInfoAdd() {
 
 	// 포인터 구조체 배열 동적할당
 	for (int i = 0; i < sizeof(perPtr) / sizeof(Person*); i++) {
-		perPtr[i] = malloc(sizeof(Person));
+		perPtr[i] = malloc(sizeof(perPtr));
 	}
 
-	int cnt = 0, selectValue = 0;
+	int selectValue = 0;
 
 	while (1) {
 		// 회원 이름
-		printf("\n%d번째 회원정보 입력 \n", cnt + 1);
 		printf("%d번째 회원 이름 입력 : ", cnt + 1);
 		gets(perPtr[cnt]->name);
 		getchar();
@@ -256,31 +256,34 @@ void personInfoAdd() {
 		// 연체횟수 0부터 시작
 		perPtr[cnt]->latePaymentCount = 0;
 
-		printf("계속 입력하시겠습니까? (1. 예), (2. 아니요) : ");
-		scanf("%d", &selectValue);
-		getchar();
-		
-		if (selectValue == YES) {
-			cnt++;
-		}
-		else if (selectValue == NO) {
-			showPersonInfoMenu(); // 전 메뉴로 돌아가기
-			break;
-		}
-	}
+		while (1) {
+			printf("계속 입력하시겠습니까? (1. 예), (2. 아니요) : ");
+			scanf("%d", &selectValue);
+			getchar();
 
-	// 동적메모리 해제
-	for (int i = 0; i < sizeof(perPtr) / sizeof(Person*); i++) {
-		free(perPtr[i]);
+			if (selectValue == YES) {
+				cnt++;
+				break;
+			}
+			else if (selectValue == NO) {
+				showPersonInfoMenu(); // 전 메뉴로 돌아가기
+				break;
+			}
+			else {
+				printf("\n다시 입력해주세요 \n");
+			}
+		}
+
+		if (selectValue == NO) break;
 	}
 }
 
 void showPersonPrint() {
 	system("cls");
 
-	int cnt;
+	int value;
 
-	for (int i = 0; i < sizeof(perPtr) / sizeof(Person*); i++) {
+	for (int i = 0; i <= cnt; i++) {
 		if (perPtr[i] == NULL) {
 			printf("출력할 회원정보가 없습니다. \n");
 			Sleep(1000);
@@ -294,14 +297,18 @@ void showPersonPrint() {
 	}
 
 	printf("메뉴로 돌아가시려면 1을 입력하시고, 프로그램 종료하시려면 0을 입력해주세요. : ");
-	scanf("%d", &cnt);
+	scanf("%d", &value);
 	getchar();
 
-	if (cnt == 1) {
+	if (value == 1) {
 		showPersonInfoMenu();
 	}
-	else if (cnt == 0) {
+	else if (value == 0) {
 		printf("프로그램을 종료합니다. \n");
+		// 동적메모리 해제
+		for (int i = 0; i < sizeof(perPtr) / sizeof(Person); i++) {
+			free(perPtr[i]);
+		}
 		return 0;
 	}
 }
